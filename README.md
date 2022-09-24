@@ -1,16 +1,50 @@
-# expense_planner
+# Expense Planner
 
 A new Flutter project.
 
-## Getting Started
+**Features:**
 
-This project is a starting point for a Flutter application.
+- Save Data to Local Storage
+- Last Week Expense Chart
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+**Packages we are using:**
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- intl: [link](https://pub.dev/packages/intl)
+- sqflite: [link](https://pub.dev/packages/sqflite)
+
+
+
+Our Calculator app contains single screen and a special feature of saving every equation history.User can clear the history any time they want.
+
+This is a complete functional calculator app that works on both Android and iOS devices. For state management, we use the provider package.
+
+
+# Expense Planner App Final UI
+
+
+**Home Screen**
+
+<img src="preview/homepage.png" alt="drawing" width="350"/>
+
+**Input Screen**
+<br>
+
+<img src="preview/input.png" alt="drawing" width="350"/>
+
+**Data View Screen**
+<br>
+
+<img src="preview/datascreen.png" alt="drawing" width="350"/>
+
+**Landscape Main Screen**
+<br>
+
+<img src="preview/land_trans.png" alt="drawing" width="600"/>
+
+**Landscape Chart View Screen**
+<br>
+
+<img src="preview/land_chart.png" alt="drawing" width="600"/>
+
+
