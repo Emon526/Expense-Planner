@@ -11,7 +11,7 @@ class TransactionItem extends StatefulWidget {
     @required this.deleteTx,
   }) : super(key: key);
 
-  final Transaction transactions;
+  final TransactionModel transactions;
   final Function deleteTx;
 
   @override
@@ -60,16 +60,24 @@ class _TransactionItemState extends State<TransactionItem> {
           DateFormat.yMMMd().format(widget.transactions.date),
         ),
         trailing: MediaQuery.of(context).size.width > 460
-            ? FlatButton.icon(
+            ? TextButton.icon(
                 icon: Icon(Icons.delete),
-                label: Text('Delete'),
-                textColor: Theme.of(context).errorColor,
-                onPressed: () => widget.deleteTx(widget.transactions.id),
+                label: Text(
+                  'Delete',
+                  style: TextStyle(
+                    color: Theme.of(context).errorColor,
+                  ),
+                ),
+                onPressed: () {
+                  widget.deleteTx();
+                },
               )
             : IconButton(
                 icon: Icon(Icons.delete),
                 color: Theme.of(context).errorColor,
-                onPressed: () => widget.deleteTx(widget.transactions.id),
+                onPressed: () {
+                  widget.deleteTx();
+                },
               ),
       ),
     );

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import './chart_bar.dart';
 
 class Chart extends StatelessWidget {
-  final List<Transaction> recentTransactions;
+  final List<TransactionModel> recentTransactions;
   Chart(this.recentTransactions);
 
   List<Map<String, Object>> get groupTransactionValues {
@@ -45,19 +45,29 @@ class Chart extends StatelessWidget {
       margin: EdgeInsets.all(20),
       child: Padding(
         padding: EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: groupTransactionValues.map((data) {
-            return Flexible(
-              fit: FlexFit.tight,
-              child: ChartBar(
-                  data['day'],
-                  data['amount'],
-                  totalSpending == 0.0
-                      ? 0.0
-                      : (data['amount'] as double) / totalSpending),
-            );
-          }).toList(),
+        child: Column(
+          children: [
+            Text(
+              'Last 7 Days',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Flexible(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: groupTransactionValues.map((data) {
+                  return Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBar(
+                        data['day'],
+                        data['amount'],
+                        totalSpending == 0.0
+                            ? 0.0
+                            : (data['amount'] as double) / totalSpending),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
         ),
       ),
     );
