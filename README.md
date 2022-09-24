@@ -6,6 +6,7 @@ A new Flutter project.
 
 - Save Data to Local Storage
 - Last Week Expense Chart
+- Delete Transection
 
 
 **Packages we are using:**
@@ -15,9 +16,10 @@ A new Flutter project.
 
 
 
-Our Calculator app contains single screen and a special feature of saving every equation history.User can clear the history any time they want.
+Our Expense Planner application contains single screen and a special feature of RealTime visualization of Last 7 Days Expences.
+User can delete the  Expense any time they want.
 
-This is a complete functional calculator app that works on both Android and iOS devices. For state management, we use the provider package.
+This is a complete functional application that works on both Android and iOS devices.
 
 
 # Expense Planner App Final UI
