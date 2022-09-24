@@ -6,7 +6,7 @@ A new Flutter project.
 
 - Save Data to Local Storage
 - Last Week Expense Chart
-- Delete Transection
+- Delete Transactions
 
 
 **Packages we are using:**
