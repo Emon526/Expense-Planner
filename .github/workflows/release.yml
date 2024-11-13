@@ -1,0 +1,84 @@
+name: Releases
+
+on:
+  push:
+    branches:
+      - master
+
+
+jobs:
+  build-cross-platform-and-release:
+    runs-on: macos-latest
+
+    steps:
+
+      - name: Set up Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          channel: "stable"
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-
+
+      - name: Get Dependency
+        run: |
+          flutter pub get
+          # flutter pub deps
+          
+      - name: Run build_runner
+        run: flutter pub run build_runner build
+
+      - name: Build Android
+        run: |
+          flutter build apk --target-platform android-arm,android-arm64,android-x64 --split-per-abi
+          flutter build apk --release
+
+      - name: Build iOS
+        run: |
+          flutter build ios --release --no-codesign
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
+
+      - name: Generate Changelog
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release to Github
+        uses: softprops/action-gh-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        with:
+          files: |
+            build/app/outputs/flutter-apk/*.apk
+            build/ios/iphoneos/app.ipa
+            # build/macos/Build/Products/Release/yoyo.mac.zip
+            # yy-linux-x86_64.tar.gz
+            # yy-windows.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
