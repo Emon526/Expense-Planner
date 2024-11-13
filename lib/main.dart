@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'homescreen.dart';
+import 'pages/home_page.dart';
+import 'providers/transaction_provider.dart';
 
 void main() {
   //for  controlling orientation
@@ -10,11 +12,16 @@ void main() {
   //   DeviceOrientation.portraitDown,
   //   DeviceOrientation.portraitUp,
   // ]);
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+          create: (_) => TransactionProvider()..getHistories()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 //TODO:: Implement Theme
-//TODO :: Implement Provider state management
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
