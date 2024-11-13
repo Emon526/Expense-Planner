@@ -6,9 +6,9 @@ import 'package:intl/intl.dart';
 
 class TransactionItem extends StatefulWidget {
   const TransactionItem({
-    Key key,
-    @required this.transactions,
-    @required this.deleteTx,
+    Key? key,
+    required this.transactions,
+    required this.deleteTx,
   }) : super(key: key);
 
   final TransactionModel transactions;
@@ -19,7 +19,7 @@ class TransactionItem extends StatefulWidget {
 }
 
 class _TransactionItemState extends State<TransactionItem> {
-  Color _bgColor;
+  late Color _bgColor;
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _TransactionItemState extends State<TransactionItem> {
         ),
         title: Text(
           widget.transactions.title,
-          style: Theme.of(context).textTheme.headline6,
+          // style: Theme.of(context).textTheme.headline6,
         ),
         subtitle: Text(
           DateFormat.yMMMd().format(widget.transactions.date),
@@ -65,8 +65,8 @@ class _TransactionItemState extends State<TransactionItem> {
                 label: Text(
                   'Delete',
                   style: TextStyle(
-                    color: Theme.of(context).errorColor,
-                  ),
+                      // color: Theme.of(context).errorColor,
+                      ),
                 ),
                 onPressed: () {
                   widget.deleteTx();
@@ -74,7 +74,7 @@ class _TransactionItemState extends State<TransactionItem> {
               )
             : IconButton(
                 icon: Icon(Icons.delete),
-                color: Theme.of(context).errorColor,
+                //  color: Theme.of(context).errorColor,
                 onPressed: () {
                   widget.deleteTx();
                 },
