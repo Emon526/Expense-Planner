@@ -15,7 +15,7 @@ class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
 
   final _amountController = TextEditingController();
-  DateTime _selectDate;
+  DateTime _selectDate = DateTime.now();
 
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _NewTransactionState extends State<NewTransaction> {
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(_amountController.text);
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectDate == null) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
     widget.addTx(
@@ -116,8 +116,8 @@ class _NewTransactionState extends State<NewTransaction> {
                 child: Text(
                   'Add Transaction',
                   style: TextStyle(
-                    color: Theme.of(context).textTheme.button.color,
-                  ),
+                      // color: Theme.of(context).textTheme.button.color,
+                      ),
                 ),
               )
             ],

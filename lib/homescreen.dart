@@ -18,17 +18,17 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   List<TransactionModel> _userTransactions = [];
 
   bool _shoeChart = false;
+
+  final DatabaseService _databaseService = DatabaseService();
+
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
     _gethistories().whenComplete(() {
       setState(() {});
     });
-
     super.initState();
   }
-
-  final DatabaseService _databaseService = DatabaseService();
 
   Future<List<TransactionModel>> _gethistories() async {
     final data = await _databaseService.histories();
@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     return Platform.isIOS
         ? CupertinoPageScaffold(
             child: pageBody,
-            navigationBar: appBar,
+            navigationBar: appBar as ObstructingPreferredSizeWidget?,
           )
         : Scaffold(
             appBar: appBar,
@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           );
         }
 
-        if (snapshot.data.isNotEmpty) {
+        if (snapshot.data!.isNotEmpty) {
           return Column(
             children: [
               Expanded(
@@ -153,9 +153,9 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                   separatorBuilder: (context, index) => const Divider(
                     thickness: 1,
                   ),
-                  itemCount: snapshot.data.length,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    final trans = snapshot.data[index];
+                    final trans = snapshot.data![index];
 
                     return TransactionItem(
                       key: ValueKey(trans.id),
@@ -180,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
   List<Widget> _buildPortraitContent(
     MediaQueryData mediaQuery,
-    AppBar appBar,
+    PreferredSizeWidget appBar,
     Widget txListWidget,
   ) {
     return [
@@ -197,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
   List<Widget> _buildLandscapeContent(
     MediaQueryData mediaQuery,
-    AppBar appBar,
+    PreferredSizeWidget appBar,
     Widget txListWidget,
   ) {
     return [
@@ -206,7 +206,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         children: <Widget>[
           Text(
             'Show Chart',
-            style: Theme.of(context).textTheme.headline6,
           ),
           Switch.adaptive(
             activeColor: Theme.of(context).colorScheme.secondary,

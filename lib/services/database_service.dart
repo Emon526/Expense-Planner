@@ -10,13 +10,7 @@ class DatabaseService {
   factory DatabaseService() => _databaseService;
   DatabaseService._internal();
 
-  static Database _database;
-  Future<Database> get database async {
-    if (_database != null) return _database;
-
-    _database = await _initDatabase();
-    return _database;
-  }
+  Future<Database> get database async => await _initDatabase();
 
   Future<Database> _initDatabase() async {
     final databasePath = await getDatabasesPath();

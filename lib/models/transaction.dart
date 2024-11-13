@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 class TransactionModel {
@@ -8,10 +7,10 @@ class TransactionModel {
   final DateTime date;
 
   TransactionModel({
-    @required this.id,
-    @required this.title,
-    @required this.amount,
-    @required this.date,
+    required this.id,
+    required this.title,
+    required this.amount,
+    required this.date,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,8 +26,8 @@ class TransactionModel {
     return TransactionModel(
       id: map['id'] ?? 0,
       title: map['title'] ?? '',
-      amount: double.parse(map['amount']) ?? '',
-      date: DateFormat.yMd().parse(map['date']) ?? '',
+      amount: double.parse(map['amount']),
+      date: DateFormat.yMd().parse(map['date']),
     );
   }
   @override

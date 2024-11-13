@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({Key key}) : super(key: key);
+  const EmptyWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class EmptyWidget extends StatelessWidget {
         children: [
           Text(
             'No transactions added yet!',
-            style: Theme.of(context).textTheme.headline6,
+            // style: Theme.of(context).textTheme.headline6,
           ),
           SizedBox(
             height: 10,
