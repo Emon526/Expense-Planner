@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
     final pageBody = SafeArea(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -191,7 +191,6 @@ class HomePage extends StatelessWidget {
             ),
             Material(
               child: Switch.adaptive(
-                activeColor: Theme.of(context).colorScheme.secondary,
                 value: provider.showChart,
                 onChanged: (_) {
                   provider.toggleShowChart();

@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 
+import 'switchthemeadaptation.dart';
+
 const primaryColor = Colors.deepOrange;
 
 const secondaryColor = Colors.deepOrangeAccent;
 const fontFamily = 'Quicksand';
 // Use system fonts like Roboto for Android and SF Pro for iOS if you want platform-native experiences
 ThemeData lightTheme = ThemeData(
+  adaptations: <Adaptation<Object>>[
+    SwitchThemeAdaptation(isDark: false),
+    // SliderThemeAdaptation(isDark: false),
+    // CircularProgressIndicatorThemeAdaptation(isDark: false),
+    // CheckboxThemeAdaptation(isDark: false),
+    // RadioThemeAdaptation(isDark: false),
+    // AlertDialogThemeAdaptation(isDark: false),
+  ],
   visualDensity: VisualDensity.adaptivePlatformDensity,
   useMaterial3: true,
   brightness: Brightness.light,
@@ -238,6 +248,14 @@ ThemeData lightTheme = ThemeData(
 );
 
 ThemeData darkTheme = ThemeData(
+  adaptations: <Adaptation<Object>>[
+    SwitchThemeAdaptation(isDark: true),
+    // SliderThemeAdaptation(isDark: true),
+    // CircularProgressIndicatorThemeAdaptation(isDark: true),
+    // CheckboxThemeAdaptation(isDark: true),
+    // RadioThemeAdaptation(isDark: true),
+    // AlertDialogThemeAdaptation(isDark: true),
+  ],
   visualDensity: VisualDensity.adaptivePlatformDensity,
   useMaterial3: true,
   brightness: Brightness.dark,
