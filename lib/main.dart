@@ -19,8 +19,6 @@ void main() {
 }
 
 //TODO:: Check Responsive
-
-//TODO:: Custom chart duration
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

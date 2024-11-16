@@ -166,7 +166,7 @@ class HomePage extends StatelessWidget {
             0.3,
         child: Consumer<TransactionProvider>(
           builder: (context, provider, child) {
-            return Chart(provider.recentTransactions);
+            return Chart();
           },
         ),
       ),
@@ -208,7 +208,7 @@ class HomePage extends StatelessWidget {
                           appBar.preferredSize.height -
                           mediaQuery.padding.top) *
                       0.7,
-                  child: Chart(provider.recentTransactions),
+                  child: Chart(),
                 )
               : txListWidget;
         },

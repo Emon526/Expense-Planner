@@ -21,7 +21,7 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: primaryColor,
   // canvasColor: Colors.white,
-  // fontFamily: fontFamily,
+  fontFamily: fontFamily,
   indicatorColor: primaryColor,
   textSelectionTheme: TextSelectionThemeData(
     cursorColor: primaryColor,
@@ -48,6 +48,82 @@ ThemeData lightTheme = ThemeData(
     ),
     behavior: SnackBarBehavior.floating,
   ),
+  datePickerTheme: DatePickerThemeData(
+    // backgroundColor: Colors.white,
+    // dayOverlayColor: WidgetStatePropertyAll(Colors.amberAccent),
+    // inputDecorationTheme: InputDecorationTheme(fillColor: Colors.amber),
+    // shadowColor: Colors.amber,
+    todayBorder: BorderSide(
+      color: primaryColor,
+    ),
+
+    // surfaceTintColor: Colors.red,
+    todayForegroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return Colors.white;
+      }
+      return Colors.black;
+    }),
+    todayBackgroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return primaryColor;
+      }
+      return null;
+    }),
+    dayBackgroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return primaryColor;
+      }
+      return null;
+    }),
+    dayForegroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return Colors.white;
+      }
+      return Colors.black;
+    }),
+    yearBackgroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return primaryColor;
+      }
+      return null;
+    }),
+    yearForegroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return Colors.white;
+      }
+      return Colors.black;
+    }),
+    cancelButtonStyle:
+        ButtonStyle(foregroundColor: WidgetStatePropertyAll(primaryColor)),
+    confirmButtonStyle:
+        ButtonStyle(foregroundColor: WidgetStatePropertyAll(primaryColor)),
+  ),
+
   textTheme: TextTheme(
     bodyLarge: TextStyle(
       color: Colors.black87,
@@ -261,7 +337,7 @@ ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: secondaryColor,
   // canvasColor: Colors.white,
-  // fontFamily: fontFamily,
+  fontFamily: fontFamily,
   indicatorColor: secondaryColor,
   textSelectionTheme: TextSelectionThemeData(
     cursorColor: secondaryColor,
@@ -286,6 +362,81 @@ ThemeData darkTheme = ThemeData(
       borderRadius: BorderRadius.circular(4), // Slightly more rounded
     ),
     behavior: SnackBarBehavior.floating,
+  ),
+  datePickerTheme: DatePickerThemeData(
+    // backgroundColor: Colors.white,
+    // dayOverlayColor: WidgetStatePropertyAll(Colors.amberAccent),
+    // inputDecorationTheme: InputDecorationTheme(fillColor: Colors.amber),
+    // shadowColor: Colors.amber,
+    todayBorder: BorderSide(
+      color: secondaryColor,
+    ),
+
+    // surfaceTintColor: Colors.red,
+    todayForegroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return Colors.white;
+      }
+      return Colors.white;
+    }),
+    todayBackgroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return secondaryColor;
+      }
+      return null;
+    }),
+    dayBackgroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return secondaryColor;
+      }
+      return null;
+    }),
+    dayForegroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return Colors.white;
+      }
+      return Colors.white;
+    }),
+    yearBackgroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return secondaryColor;
+      }
+      return null;
+    }),
+    yearForegroundColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        return null;
+      }
+      if (states.contains(WidgetState.selected)) {
+        return Colors.white;
+      }
+      return Colors.white;
+    }),
+    cancelButtonStyle:
+        ButtonStyle(foregroundColor: WidgetStatePropertyAll(secondaryColor)),
+    confirmButtonStyle:
+        ButtonStyle(foregroundColor: WidgetStatePropertyAll(secondaryColor)),
   ),
 
   textTheme: TextTheme(
