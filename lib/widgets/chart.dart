@@ -1,43 +1,21 @@
+import 'package:expense_planner/providers/chartprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/transaction.dart';
 import 'package:intl/intl.dart';
 import './chart_bar.dart';
+import 'dart:developer';
 
-class Chart extends StatelessWidget {
+class Chart extends StatefulWidget {
   final List<TransactionModel> recentTransactions;
+
   Chart(this.recentTransactions);
 
-  List<Map<String, Object>> get groupTransactionValues {
-    return List.generate(
-      7,
-      (index) {
-        final weekDay = DateTime.now().subtract(
-          Duration(days: index),
-        );
-        var totalSum = 0.0;
+  @override
+  _ChartState createState() => _ChartState();
+}
 
-        for (var i = 0; i < recentTransactions.length; i++) {
-          if (recentTransactions[i].date.day == weekDay.day &&
-              recentTransactions[i].date.month == weekDay.month &&
-              recentTransactions[i].date.year == weekDay.year) {
-            totalSum += recentTransactions[i].amount;
-          }
-        }
-
-        return {
-          'day': DateFormat.E().format(weekDay).substring(0, 1),
-          'amount': totalSum,
-        };
-      },
-    ).reversed.toList();
-  }
-
-  double get totalSpending {
-    return groupTransactionValues.fold(0.0, (sum, item) {
-      return sum + (item['amount'] as double);
-    });
-  }
-
+class _ChartState extends State<Chart> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -46,10 +24,34 @@ class Chart extends StatelessWidget {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-            Text(
-              'Last 7 Days',
-              // style: Theme.of(context).textTheme.headline6,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Transaction Chart',
+                  //    style: Theme.of(context).textTheme.headline6,
+                ),
+                DropdownButton<int>(
+                  value: context.watch<ChartProvider>().selectedDays,
+                  items: context
+                      .watch<ChartProvider>()
+                      .selectedDaysList
+                      .map(
+                        (days) => DropdownMenuItem(
+                          value: days,
+                          child: Text('Last $days Days'),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      context.read<ChartProvider>().selectedDays = value;
+                    }
+                  },
+                ),
+              ],
             ),
+            SizedBox(height: 10),
             Flexible(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -70,5 +72,38 @@ class Chart extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<Map<String, Object>> get groupTransactionValues {
+    // debugPrint(widget.recentTransactions.toString());
+    log(widget.recentTransactions.toString());
+    return List.generate(
+      context.watch<ChartProvider>().selectedDays,
+      (index) {
+        final weekDay = DateTime.now().subtract(
+          Duration(days: index),
+        );
+        var totalSum = 0.0;
+
+        for (var i = 0; i < widget.recentTransactions.length; i++) {
+          if (widget.recentTransactions[i].date.day == weekDay.day &&
+              widget.recentTransactions[i].date.month == weekDay.month &&
+              widget.recentTransactions[i].date.year == weekDay.year) {
+            totalSum += widget.recentTransactions[i].amount;
+          }
+        }
+
+        return {
+          'day': DateFormat.E().format(weekDay).substring(0, 1),
+          'amount': totalSum,
+        };
+      },
+    ).reversed.toList();
+  }
+
+  double get totalSpending {
+    return groupTransactionValues.fold(0.0, (sum, item) {
+      return sum + (item['amount'] as double);
+    });
   }
 }

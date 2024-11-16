@@ -1,3 +1,4 @@
+import 'package:expense_planner/providers/chartprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
             create: (_) => ThemeProvider()..initializeTheme()),
         ChangeNotifierProvider(
             create: (_) => TransactionProvider()..getHistories()),
+        ChangeNotifierProvider(
+          create: (_) => ChartProvider(),
+        ),
       ],
       builder: (context, child) {
         return Consumer<ThemeProvider>(
