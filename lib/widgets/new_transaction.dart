@@ -15,7 +15,7 @@ class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
 
   final _amountController = TextEditingController();
-  DateTime _selectDate = DateTime.now();
+  DateTime? _selectDate;
 
   @override
   void initState() {
@@ -74,10 +74,10 @@ class _NewTransactionState extends State<NewTransaction> {
         elevation: 5,
         child: Container(
           padding: EdgeInsets.only(
-              top: 10,
-              left: 10,
-              right: 10,
-              bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+              top: 20,
+              left: 20,
+              right: 20,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
@@ -88,6 +88,9 @@ class _NewTransactionState extends State<NewTransaction> {
                 // },
                 controller: titleController,
                 onSubmitted: (_) => _submitData(),
+              ),
+              SizedBox(
+                height: 20,
               ),
               TextField(
                 decoration: InputDecoration(labelText: 'Amount'),
@@ -102,7 +105,12 @@ class _NewTransactionState extends State<NewTransaction> {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        'Picked Date :${DateFormat.yMd().format(_selectDate)}',
+                        _selectDate == null
+                            ? 'No Date Chosen!'
+                            : 'Picked Date :${DateFormat.yMd().format(_selectDate!)}',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
                     ),
                     AdaptiveFlatButton('Choose Date', _persentDatePicker)

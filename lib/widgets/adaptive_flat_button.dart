@@ -14,9 +14,10 @@ class AdaptiveFlatButton extends StatelessWidget {
         ? CupertinoButton(
             child: Text(
               text,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             onPressed: handler,
           )

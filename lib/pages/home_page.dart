@@ -3,16 +3,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/themeprovider.dart';
+import '../utils/utils.dart';
 import '../widgets/new_transaction.dart';
 import '../widgets/chart.dart';
 import '../providers/transaction_provider.dart';
 import '../widgets/emptywidget.dart';
+import '../widgets/selectionbuttonwidget.dart';
 import '../widgets/transaction_item.dart';
 
-class MyHomePage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
+    final mediaQuery = Utils(context).mediaQuery;
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     final appBar = _buildAppBar(context);
 
@@ -26,22 +29,25 @@ class MyHomePage extends StatelessWidget {
 
     final pageBody = SafeArea(
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            if (isLandscape)
-              ..._buildLandscapeContent(mediaQuery, appBar, txListWidget),
-            if (!isLandscape)
-              ..._buildPortraitContent(mediaQuery, appBar, txListWidget),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              if (isLandscape)
+                ..._buildLandscapeContent(mediaQuery, appBar, txListWidget),
+              if (!isLandscape)
+                ..._buildPortraitContent(mediaQuery, appBar, txListWidget),
+            ],
+          ),
         ),
       ),
     );
 
     return Platform.isIOS
         ? CupertinoPageScaffold(
+            navigationBar: appBar,
             child: pageBody,
-            navigationBar: appBar as ObstructingPreferredSizeWidget?,
           )
         : Scaffold(
             appBar: appBar,
@@ -57,10 +63,30 @@ class MyHomePage extends StatelessWidget {
           );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
+  _buildAppBar(BuildContext context) {
     return Platform.isIOS
         ? CupertinoNavigationBar(
-            middle: Text('Personal Expenses'),
+            backgroundColor: Theme.of(context).canvasColor,
+            middle: Text(
+              'Personal Expenses',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            leading: GestureDetector(
+              child: Icon(
+                context.watch<ThemeProvider>().themeMode == ThemeMode.system
+                    ? CupertinoIcons.device_phone_portrait
+                    : context.watch<ThemeProvider>().themeMode ==
+                            ThemeMode.light
+                        ? CupertinoIcons.sun_max
+                        : CupertinoIcons.moon,
+              ),
+              onTap: () => Utils(context).showCustomDialog(
+                child: _themetileWidget(
+                  context: context,
+                  size: Utils(context).getScreenSize,
+                ),
+              ),
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -72,7 +98,25 @@ class MyHomePage extends StatelessWidget {
             ),
           )
         : AppBar(
-            title: Text('Personal Expenses'),
+            title: Text(
+              'Personal Expenses',
+            ),
+            leading: IconButton(
+              icon: Icon(
+                context.watch<ThemeProvider>().themeMode == ThemeMode.system
+                    ? Icons.phonelink_setup_outlined
+                    : context.watch<ThemeProvider>().themeMode ==
+                            ThemeMode.light
+                        ? Icons.light_mode_outlined
+                        : Icons.dark_mode_outlined,
+              ),
+              onPressed: () => Utils(context).showCustomDialog(
+                child: _themetileWidget(
+                  context: context,
+                  size: Utils(context).getScreenSize,
+                ),
+              ),
+            ),
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.add),
@@ -92,7 +136,9 @@ class MyHomePage extends StatelessWidget {
         }
 
         return ListView.separated(
-          separatorBuilder: (context, index) => const Divider(thickness: 1),
+          separatorBuilder: (context, index) => SizedBox(
+            height: Utils(context).getScreenSize.height * 0.005,
+          ),
           itemCount: transactions.length,
           itemBuilder: (context, index) {
             final trans = transactions[index];
@@ -124,6 +170,7 @@ class MyHomePage extends StatelessWidget {
           },
         ),
       ),
+      SizedBox(height: mediaQuery.size.height * 0.01),
       txListWidget,
     ];
   }
@@ -134,25 +181,26 @@ class MyHomePage extends StatelessWidget {
     Widget txListWidget,
   ) {
     return [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('Show Chart'),
-          Consumer<TransactionProvider>(
-            builder: (context, provider, child) {
-              return Material(
-                child: Switch.adaptive(
-                  activeColor: Theme.of(context).colorScheme.secondary,
-                  value: provider.showChart,
-                  onChanged: (_) {
-                    provider.toggleShowChart();
-                  },
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+      Consumer<TransactionProvider>(builder: (context, provider, child) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Show Chart',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            Material(
+              child: Switch.adaptive(
+                activeColor: Theme.of(context).colorScheme.secondary,
+                value: provider.showChart,
+                onChanged: (_) {
+                  provider.toggleShowChart();
+                },
+              ),
+            ),
+          ],
+        );
+      }),
       Consumer<TransactionProvider>(
         builder: (context, provider, child) {
           return provider.showChart
@@ -182,5 +230,70 @@ class MyHomePage extends StatelessWidget {
         );
       },
     );
+  }
+
+  _themetileWidget({
+    required BuildContext context,
+    required Size size,
+  }) {
+    return Consumer<ThemeProvider>(builder: (context, provider, child) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Select Theme',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).primaryColor,
+                  ),
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: Theme.of(context).primaryColor),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SelectionButtonWidget(
+                    buttontitle: 'System Theme',
+                    iconCondition: provider.themeMode == ThemeMode.system,
+                    ontap: () {
+                      provider.themeMode = ThemeMode.system;
+                    },
+                  ),
+                  Divider(
+                    height: 0,
+                    color: Theme.of(context).primaryColor.withOpacity(0.5),
+                  ),
+                  SelectionButtonWidget(
+                    iconCondition: provider.themeMode == ThemeMode.light,
+                    buttontitle: 'Light Theme',
+                    ontap: () {
+                      provider.themeMode = ThemeMode.light;
+                    },
+                  ),
+                  Divider(
+                    height: 0,
+                    color: Theme.of(context).primaryColor.withOpacity(0.5),
+                  ),
+                  SelectionButtonWidget(
+                    iconCondition: provider.themeMode == ThemeMode.dark,
+                    buttontitle: 'Dark Theme',
+                    ontap: () {
+                      provider.themeMode = ThemeMode.dark;
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
