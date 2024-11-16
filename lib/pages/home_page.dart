@@ -217,18 +217,23 @@ class HomePage extends StatelessWidget {
   }
 
   void _startAddNewTransaction(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (_) {
-        return GestureDetector(
-          onTap: () {},
-          child: NewTransaction(
-            context.read<TransactionProvider>().addNewTransaction,
-          ),
-          behavior: HitTestBehavior.opaque,
-        );
-      },
-    );
+    Platform.isIOS
+        ? showCupertinoModalPopup(
+            context: context,
+            builder: (_) {
+              return NewTransaction(
+                context.read<TransactionProvider>().addNewTransaction,
+              );
+            },
+          )
+        : showModalBottomSheet(
+            context: context,
+            builder: (_) {
+              return NewTransaction(
+                context.read<TransactionProvider>().addNewTransaction,
+              );
+            },
+          );
   }
 
   _themetileWidget({
