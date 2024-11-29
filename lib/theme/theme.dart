@@ -9,7 +9,7 @@ const fontFamily = 'Quicksand';
 // Use system fonts like Roboto for Android and SF Pro for iOS if you want platform-native experiences
 ThemeData lightTheme = ThemeData(
   adaptations: <Adaptation<Object>>[
-    SwitchThemeAdaptation(isDark: false),
+    SwitchThemeAdaptation(),
     // SliderThemeAdaptation(isDark: false),
     // CircularProgressIndicatorThemeAdaptation(isDark: false),
     // CheckboxThemeAdaptation(isDark: false),
@@ -30,7 +30,7 @@ ThemeData lightTheme = ThemeData(
   ),
 
   appBarTheme: AppBarTheme(
-    centerTitle: true,
+    // centerTitle: true,
     iconTheme: IconThemeData(color: primaryColor),
     actionsIconTheme: IconThemeData(color: primaryColor),
   ),
@@ -325,7 +325,7 @@ ThemeData lightTheme = ThemeData(
 
 ThemeData darkTheme = ThemeData(
   adaptations: <Adaptation<Object>>[
-    SwitchThemeAdaptation(isDark: true),
+    SwitchThemeAdaptation(),
     // SliderThemeAdaptation(isDark: true),
     // CircularProgressIndicatorThemeAdaptation(isDark: true),
     // CheckboxThemeAdaptation(isDark: true),
@@ -345,7 +345,7 @@ ThemeData darkTheme = ThemeData(
     selectionHandleColor: secondaryColor,
   ),
   appBarTheme: AppBarTheme(
-      centerTitle: true,
+      //centerTitle: true,
       iconTheme: IconThemeData(color: secondaryColor),
       actionsIconTheme: IconThemeData(color: secondaryColor)),
 

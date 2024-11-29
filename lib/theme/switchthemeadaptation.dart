@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'theme.dart';
 
 class SwitchThemeAdaptation extends Adaptation<SwitchThemeData> {
-  bool isDark = false;
-  SwitchThemeAdaptation({required this.isDark});
+  SwitchThemeAdaptation();
 
   @override
   SwitchThemeData adapt(ThemeData theme, SwitchThemeData defaultValue) =>
@@ -26,7 +25,9 @@ class SwitchThemeAdaptation extends Adaptation<SwitchThemeData> {
             return null;
           }
           if (states.contains(WidgetState.selected)) {
-            return isDark ? secondaryColor : primaryColor;
+            return theme.brightness == Brightness.dark
+                ? secondaryColor
+                : primaryColor;
           }
           return null;
         }),

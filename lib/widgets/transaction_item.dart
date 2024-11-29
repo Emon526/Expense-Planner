@@ -36,7 +36,7 @@ class TransactionItem extends StatelessWidget {
         ),
         trailing: MediaQuery.of(context).size.width > 460
             ? TextButton.icon(
-                icon: Icon(Icons.delete),
+                icon: Icon(Icons.delete_outline),
                 label: Text(
                   'Delete',
                   // style: TextStyle(
@@ -48,7 +48,7 @@ class TransactionItem extends StatelessWidget {
                 },
               )
             : IconButton(
-                icon: Icon(Icons.delete),
+                icon: Icon(Icons.delete_outline),
                 //  color: Theme.of(context).errorColor,
                 onPressed: () {
                   deleteTx();
