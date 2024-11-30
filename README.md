@@ -17,72 +17,54 @@ This is a complete functional application that works on both Android and iOS dev
 
 **Home Screen**
 
+<table>
 <tr>
-<td>
-<img src="preview/dark_homepage.png" alt="drawing" width="350"/>
-</td>
-<td>
-<img src="preview/light_homepage.png" alt="drawing" width="350"/>
-</td>
+<td><img src="preview/dark_homepage.png" alt="drawing" width="350"/></td>
+<td><img src="preview/light_homepage.png" alt="drawing" width="350"/></td>
 </tr>
+</table>
 
 **Input Screen**
-<br>
 
+<table>
 <tr>
-<td>
-<img src="preview/dark_input.png" alt="drawing" width="350"/>
-</td>
-<td>
-<img src="preview/light_input.png" alt="drawing" width="350"/>
-</td>
+<td><img src="preview/dark_input.png" alt="drawing" width="350"/></td>
+<td><img src="preview/light_input.png" alt="drawing" width="350"/></td>
 </tr>
+</table>
 
 **Data View Screen**
-<br>
 
+<table>
 <tr>
-<td>
-<img src="preview/dark_datascreen.png" alt="drawing" width="350"/>
-</td>
-<td>
-<img src="preview/light_datascreen.png" alt="drawing" width="350"/>
-</td>
+<td><img src="preview/dark_datascreen.png" alt="drawing" width="350"/></td>
+<td><img src="preview/light_datascreen.png" alt="drawing" width="350"/></td>
 </tr>
+</table>
 
 **Theme Selection**
 
-<br>
+<table>
 <tr>
-<td>
-<img src="preview/dark_themepick.png" alt="drawing" width="350"/>
-</td>
-<td>
-<img src="preview/light_themepick.png" alt="drawing" width="350"/>
-</td>
+<td><img src="preview/dark_themepick.png" alt="drawing" width="350"/></td>
+<td><img src="preview/light_themepick.png" alt="drawing" width="350"/></td>
 </tr>
+</table>
 
 **Landscape Main Screen**
 
-<br>
-
+<table>
 <tr>
-<td>
-<img src="preview/dark_land_trans.png" alt="drawing" width="600"/>
-</td>
-<td>
-<img src="preview/light_land_trans.png" alt="drawing" width="600"/>
-</td>
+<td><img src="preview/dark_land_trans.png" alt="drawing" width="600"/></td>
+<td><img src="preview/light_land_trans.png" alt="drawing" width="600"/></td>
 </tr>
+</table>
 
 **Landscape Chart View Screen**
-<br>
 
+<table>
 <tr>
-<td>
-<img src="preview/dark_land_chart.png" alt="drawing" width="600"/>
-</td>
-<td>
-<img src="preview/light_land_chart.png" alt="drawing" width="600"/>
-</td>
+<td><img src="preview/dark_land_chart.png" alt="drawing" width="600"/></td>
+<td><img src="preview/light_land_chart.png" alt="drawing" width="600"/></td>
 </tr>
+</table>
