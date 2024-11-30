@@ -1,3 +1,13 @@
+## [1.2.1](https://github.com/Emon526/Expense-Planner/compare/v1.2.0...v1.2.1) (2024-11-30)
+
+
+### Bug Fixes
+
+* minor fix ([00f0f2e](https://github.com/Emon526/Expense-Planner/commit/00f0f2e5cff4930b0f571fa81f2a7439e59fd347))
+* Platform Specific Theme ([1d49579](https://github.com/Emon526/Expense-Planner/commit/1d49579fb1ea52fa653cad5eeae9aad0ca559f95))
+
+
+
 # [1.2.0](https://github.com/Emon526/Expense-Planner/compare/v1.1.1...v1.2.0) (2024-11-30)
 
 
