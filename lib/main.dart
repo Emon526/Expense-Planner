@@ -1,64 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:provider/provider.dart';
 
-import 'homescreen.dart';
+import 'pages/home_page.dart';
+import 'providers/chartprovider.dart';
+import 'providers/themeprovider.dart';
+import 'providers/transaction_provider.dart';
+import 'theme/theme.dart';
 
 void main() {
-  //for  controlling orientation
-
-  // WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitDown,
-  //   DeviceOrientation.portraitUp,
-  // ]);
-  runApp(MyApp());
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  runApp(const MyApp());
 }
 
-//TODO:: Implement Theme
-//TODO :: Implement Provider state management
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Personal Expenses',
-      // theme: ThemeData(
-      //   fontFamily: 'Quicksand',
-      //   // textTheme: ThemeData.light().textTheme.copyWith(
-      //   //     headline6: TextStyle(
-      //   //       fontWeight: FontWeight.bold,
-      //   //       fontFamily: 'OpenSans',
-      //   //       fontSize: 18,
-      //   //     ),
-      //   //     button: TextStyle(color: Colors.white),
-      //   //     ),
-      //   // appBarTheme: AppBarTheme(
-      //   //   toolbarTextStyle: ThemeData.light()
-      //   //       .textTheme
-      //   //       .copyWith(
-      //   //         headline6: TextStyle(
-      //   //           fontFamily: 'OpenSans',
-      //   //           fontSize: 20,
-      //   //           fontWeight: FontWeight.bold,
-      //   //         ),
-      //   //       )
-      //   //       .bodyText2,
-      //   //   titleTextStyle: ThemeData.light()
-      //   //       .textTheme
-      //   //       .copyWith(
-      //   //         headline6: TextStyle(
-      //   //           fontFamily: 'OpenSans',
-      //   //           fontSize: 20,
-      //   //           fontWeight: FontWeight.bold,
-      //   //         ),
-      //   //       )
-      //   //       .headline6,
-      //   // ),
-      //   colorScheme:
-      //       ColorScheme.fromSwatch(primarySwatch: Colors.purple).copyWith(
-      //     secondary: Colors.amber,
-      //   ),
-      // ),
-      home: MyHomePage(),
+    void removeSplash() async => await Future.delayed(
+        const Duration(seconds: 3), () => FlutterNativeSplash.remove());
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (_) => ThemeProvider()..initializeTheme()),
+        ChangeNotifierProvider(
+            create: (_) => TransactionProvider()..getHistories()),
+        ChangeNotifierProvider(
+          create: (_) => ChartProvider(),
+        ),
+      ],
+      builder: (context, child) {
+        return Consumer<ThemeProvider>(
+          builder: (
+            context,
+            value,
+            child,
+          ) {
+            removeSplash();
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Expense Planner',
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: context.watch<ThemeProvider>().themeMode,
+              home: HomePage(),
+            );
+          },
+        );
+      },
     );
   }
 }

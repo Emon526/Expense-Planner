@@ -13,7 +13,7 @@ class EmptyWidget extends StatelessWidget {
         children: [
           Text(
             'No transactions added yet!',
-            // style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           SizedBox(
             height: 10,
