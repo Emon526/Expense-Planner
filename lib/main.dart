@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           ) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Personal Expenses',
+              title: 'Expense Planner',
               theme: lightTheme,
               darkTheme: darkTheme,
               themeMode: context.watch<ThemeProvider>().themeMode,

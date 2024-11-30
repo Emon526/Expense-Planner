@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
         ? CupertinoNavigationBar(
             backgroundColor: Theme.of(context).canvasColor,
             middle: Text(
-              'Personal Expenses',
+              'Expense Planner',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             leading: GestureDetector(
@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
           )
         : AppBar(
             title: Text(
-              'Personal Expenses',
+              'Expense Planner',
             ),
             leading: IconButton(
               icon: Icon(
