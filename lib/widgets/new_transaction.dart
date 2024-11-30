@@ -70,60 +70,63 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.only(
-          top: 20,
-          left: 20,
-          right: 20,
-          bottom: MediaQuery.of(context).viewInsets.bottom + 20,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              controller: titleController,
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-              textCapitalization: TextCapitalization.sentences,
-              onSubmitted: (_) => _submitData(),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
-              textInputAction: TextInputAction.next,
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              // onSubmitted: (_) => _submitData(),
-              onSubmitted: (_) => _persentDatePicker(),
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    _selectDate == null
-                        ? 'No Date Chosen!'
-                        : 'Picked Date :${DateFormat.yMd().format(_selectDate!)}',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+      child: Material(
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 20,
+            left: 20,
+            right: 20,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(labelText: 'Title'),
+                controller: titleController,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                textCapitalization: TextCapitalization.sentences,
+                onSubmitted: (_) => _submitData(),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Amount'),
+                textInputAction: TextInputAction.next,
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                // onSubmitted: (_) => _submitData(),
+                onSubmitted: (_) => _persentDatePicker(),
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      _selectDate == null
+                          ? 'No Date Chosen!'
+                          : 'Picked Date :${DateFormat.yMd().format(_selectDate!)}',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
-                ),
-                AdaptiveFlatButton('Choose Date', _persentDatePicker)
-              ],
-            ),
-            ElevatedButton(
-              onPressed: _submitData,
-              child: Text(
-                'Add Transaction',
-                style: TextStyle(
-                    // color: Theme.of(context).textTheme.button.color,
-                    ),
+                  AdaptiveFlatButton('Choose Date', _persentDatePicker)
+                ],
               ),
-            )
-          ],
+              ElevatedButton(
+                onPressed: _submitData,
+                child: Text(
+                  'Add Transaction',
+                  style: TextStyle(
+                      // color: Theme.of(context).textTheme.button.color,
+                      ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

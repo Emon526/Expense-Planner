@@ -6,7 +6,8 @@ import 'pages/home_page.dart';
 import 'providers/chartprovider.dart';
 import 'providers/themeprovider.dart';
 import 'providers/transaction_provider.dart';
-import 'theme/theme.dart';
+import 'theme/dark_theme.dart';
+import 'theme/light_theme.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -43,8 +44,8 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Expense Planner',
-              theme: lightTheme,
-              darkTheme: darkTheme,
+              theme: platformSpecificLightTheme(),
+              darkTheme: platformSpecificDarkTheme(),
               themeMode: context.watch<ThemeProvider>().themeMode,
               home: HomePage(),
             );
