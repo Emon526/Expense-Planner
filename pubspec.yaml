@@ -34,6 +34,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.13
+  flutter_launcher_icons: ^0.14.1
   flutter_test:
     sdk: flutter
 
@@ -50,6 +51,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
