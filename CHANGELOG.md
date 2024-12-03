@@ -1,3 +1,12 @@
+## [1.2.2](https://github.com/Emon526/Expense-Planner/compare/v1.2.1...v1.2.2) (2024-12-03)
+
+
+### Bug Fixes
+
+* Changed App Name & Bundle Id ([cec2d36](https://github.com/Emon526/Expense-Planner/commit/cec2d36f36de46128002c6057092a5f7c1a44e3c))
+
+
+
 ## [1.2.1](https://github.com/Emon526/Expense-Planner/compare/v1.2.0...v1.2.1) (2024-11-30)
 
 
@@ -52,10 +61,6 @@
 ### Features
 
 * Updated to flutter 3 & Null Safety ([60dab45](https://github.com/Emon526/Expense-Planner/commit/60dab4594eda01522572bdbc8f8671c33236cbee))
-
-
-
-# 1.0.0 (2022-09-24)
 
 
 
