@@ -32,7 +32,7 @@ jobs:
           channel: "stable"
 
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pub-cache
           key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
