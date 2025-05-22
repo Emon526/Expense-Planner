@@ -10,10 +10,12 @@
     <string>Your App's App Store Provisioning Profile Name</string>
   </dict>
   <key>signingCertificate</key>
-  <string>Apple Distribution</string>
+  <string>iOS Distribution</string>
   <key>signingStyle</key>
   <string>manual</string>
   <key>teamID</key>
-  <string>*****</string> # From https://developer.apple.com/account
+  <string>B682R4GGAR</string> # From https://developer.apple.com/account
 </dict>
 </plist>
+<!-- 56S5TWXASG -->
+<!-- B682R4GGAR -->
